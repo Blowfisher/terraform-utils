@@ -13,8 +13,11 @@ module "ec2" {
 //自定义vpc 安全组id
  security_group = ["sg-017e90ce7d6cd9b97"]
 }
-
+/*
 module "ami"{
   source = "./modules/ami"
   
+}*/
+module "efs"{
+  source = "./modules/efs"
 }

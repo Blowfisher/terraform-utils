@@ -10,7 +10,16 @@ output "ec2_id" {
 output "ec2_volume"{
   value = "${module.ec2.myec2_volume} GiB"
 }
-
+/*
 output "volume_snapshot"{
   value = module.ami.myami
+}*/
+
+output "myefs_target_id"{
+  value = module.efs.myefs_targets_id
+}
+
+
+output "myefs_id" {
+  value = module.efs.myefs_id
 }
