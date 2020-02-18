@@ -19,6 +19,9 @@ output "myefs_target_id"{
   value = module.efs.myefs_targets_id
 }
 
+output "myefs_target_dnsname"{
+  value = module.efs.myefs_targets_dns_name
+}
 
 output "myefs_id" {
   value = module.efs.myefs_id

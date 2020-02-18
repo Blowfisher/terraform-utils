@@ -20,4 +20,6 @@ module "ami"{
 }*/
 module "efs"{
   source = "./modules/efs"
+//请指定需要放置mount target的vpc
+  myvpc_id = ""
 }
