@@ -7,6 +7,9 @@ data "aws_subnet" "subnet_info"{
   id = each.value
 }
 
+data "aws_availability_zones" "azs"{
+  state = "available"
+}
 resource "aws_efs_file_system" "myefs"{
   creation_token = "my-bambo-efs"
   tags = {
@@ -19,7 +22,15 @@ resource "aws_efs_file_system" "myefs"{
 
 resource "aws_efs_mount_target" "myefs_target"{
   file_system_id = aws_efs_file_system.myefs.id
-  for_each = data.aws_subnet_ids.myvpc_subnet.ids
-  subnet_id = each.value
+  for_each = local.subnet
+  subnet_id = each.value[0]
   
+}
+
+locals{
+  subnet = {for s in data.aws_subnet.subnet_info: "${s.availability_zone}" => s.id...}
+}
+
+output "subnet_info"{
+  value = local.subnet
 }
