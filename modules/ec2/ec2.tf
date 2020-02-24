@@ -30,6 +30,7 @@ resource "aws_instance" "myec2" {
   tags = {
     Name = "myec2"
   }
+  count = 1
 }
 
 data "aws_ebs_volume" "ebs_volume"{
@@ -49,3 +50,22 @@ locals {
   volume_name = "myec2_disk"
   volume_type = "gp2"
 }
+
+resource "aws_instance" "web"{
+  ami = "ami-0d59ddf55cdda6e21"
+  instance_type = "t2.micro"
+  key_name = "terraform"
+  count = 2
+  
+  tags = {
+   Name = "K8S"
+   Role = count.index < 2 ? "K8S-Master" : "K8S-Node"
+  }
+}
+
+output "ec2_pubip"{
+  value = "${aws_instance.web[*].public_ip}"
+}
+  provisioner "local-exec"{
+   command = "echo ${aws_instance.web[count.index].private_ip} >>/tmp/private_ips.txt"
+  }
