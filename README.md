@@ -1,7 +1,9 @@
 # terraform-utils
-personal terraform util tools
+-----------------
 
-ec2 module : you need to set some var 
+##### personal terraform util tools
+
+```ec2 module : you need to set some var 
 //自定义已经存在的子网id
  subnet_id = "subnet-00e19c1de8b"
 //自定义root volume size(GiB)
@@ -23,3 +25,4 @@ EFS module:
 //请指定需要放置mount target的vpc
    myvpc_id = ""
 默认生命周期30天；vpc下的可用区都会创建mount target
+```
